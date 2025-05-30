@@ -26,11 +26,12 @@ const login = async (req, res) => {
     // console.log(userFromEmail);
 
     if (userFromEmail) {
-        const token = tokenUtil.generateToken(userFromEmail._id);
+        // Fix: tokenUtil is not defined, should be token
+        const authToken = token.generateToken(userFromEmail._id);
         if (encryptUtil.comparePassword(password, userFromEmail.password)) {
             res.status(200).json({
                 message: "user login successfully....",
-                token: token,
+                token: authToken,
             })
         } else {
             res.status(401).json({

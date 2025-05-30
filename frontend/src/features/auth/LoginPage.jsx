@@ -1,7 +1,7 @@
 // src/features/auth/LoginPage.jsx
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from './authSlice';
+import { login } from './authSlice';
 import { useNavigate } from 'react-router-dom';
 
 export const LoginPage = () => {
@@ -16,7 +16,7 @@ export const LoginPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const result = await dispatch(loginUser(formData));
+        const result = await dispatch(login(formData)); // Changed from loginUser to login
         if (result.meta.requestStatus === 'fulfilled') navigate('/dashboard');
     };
 

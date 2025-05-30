@@ -1,35 +1,66 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { projectService } from '../../services/api';
 
-export const fetchProjects = createAsyncThunk('projects/fetch', async (_, { getState, rejectWithValue }) => {
-    const token = getState().auth.token;
+// Async thunks
+export const fetchProjects = createAsyncThunk(
+  'projects/fetchProjects',
+  async (search = '', { rejectWithValue }) => {
     try {
-        const response = await axios.get('/api/project/getallprojects', {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
-        return response.data;
-    } catch (err) {
-        return rejectWithValue(err.response?.data?.message || 'Failed to fetch projects');
+      const response = await projectService.getAllProjects(search);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || 'Failed to fetch projects');
     }
-});
+  }
+);
 
-const projectSlice = createSlice({
-    name: 'projects',
-    initialState: { items: [], loading: false, error: null },
-    extraReducers: (builder) => {
-        builder
-            .addCase(fetchProjects.pending, (state) => { state.loading = true; })
-            .addCase(fetchProjects.fulfilled, (state, action) => {
-                state.loading = false;
-                state.items = action.payload.items;
-            })
-            .addCase(fetchProjects.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.error.message;
-            });
+export const createProject = createAsyncThunk(
+  'projects/createProject',
+  async (projectData, { rejectWithValue }) => {
+    try {
+      const response = await projectService.createProject(projectData);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || 'Failed to create project');
     }
+  }
+);
+
+// Initial state
+const initialState = {
+  projects: [],
+  total: 0,
+  loading: false,
+  error: null,
+};
+
+// Slice
+const projectSlice = createSlice({
+  name: 'projects',
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      // Fetch projects
+      .addCase(fetchProjects.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchProjects.fulfilled, (state, action) => {
+        state.loading = false;
+        state.projects = action.payload.projects;
+        state.total = action.payload.total;
+      })
+      .addCase(fetchProjects.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Create project
+      .addCase(createProject.fulfilled, (state, action) => {
+        state.projects.push(action.payload.data);
+        state.total += 1;
+      });
+  },
 });
 
 export default projectSlice.reducer;

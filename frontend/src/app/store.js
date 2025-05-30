@@ -3,8 +3,10 @@ import authReducer from '../features/auth/authSlice';
 import projectReducer from '../features/projects/projectSlice';
 
 export const store = configureStore({
-    reducer: {
-        auth: authReducer,
-        project: projectReducer,
-    },
+  reducer: {
+    auth: authReducer,
+    projects: projectReducer,
+  },
 });
+
+export default store;
