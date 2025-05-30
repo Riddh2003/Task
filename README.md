@@ -1,0 +1,32 @@
+backend
+--->src
+  ---> Controller
+      --->AuthContoller.js
+      --->ProjectController.js
+  --->Middleware
+      ---> AuthMiddleware.js
+  --->Model
+      ---> ProjectModel.js
+      ---> UserModel.js
+  ---> routes
+      --->AuthRoute.js
+      --->ProjectRoute.js
+  --->Utils
+      --->EncryptUtil.js
+      --->TokenUtil.js
+--->app.js
+
+Frontend
+    ---> app
+        --->store.js
+    ---> components
+        --->ProtectedRoute.js
+    ---> features
+        ---> auth
+            --->authSlice.js
+            --->Loginpage.jsx
+        ---> projects
+            --->projectSlice.js
+            --->Dashboard.jsx
+    ---> pages
+        ---> NotFound.jsx
