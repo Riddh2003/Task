@@ -1,38 +1,24 @@
-backend
---->src
-  ---> Controller
-      --->AuthContoller.js
-      --->ProjectController.js
-  --->Middleware
-      ---> AuthMiddleware.js
-  --->Model
-      ---> ProjectModel.js
-      ---> UserModel.js
-  ---> routes
-      --->AuthRoute.js
-      --->ProjectRoute.js
-  --->Utils
-      --->EncryptUtil.js
-      --->TokenUtil.js
---->app.js
+**Frontend** 
+React.js, Redux, Tailwind CSS
 
-Frontend
-    ---> app
-        --->store.js
-    ---> components
-        --->ProtectedRoute.js
-    ---> features
-        ---> auth
-            --->authSlice.js
-            --->Loginpage.jsx
-        ---> projects
-            --->projectSlice.js
-            --->Dashboard.jsx
-    ---> pages
-        ---> NotFound.jsx
+**Backend:**
+Node.js, Express.js, MongoDB
 
+**Use Hooks:** 
+useEffect()
+useState()
+useContext()
+useNavigate()
+useParams()
 
-Add manually data in project table:
+**Use Library:**
+React Router Dom
+ThemeProvider
+
+**Toolkit:**
+Redux Toolkit
+
+**Add manually data in project table:**
 {
     "title": "Project 1",
     "description": "Project 1 description",
@@ -40,7 +26,7 @@ Add manually data in project table:
     "status":"active"
 }
 
-Add Admin data manually in admin table:
+**Add Admin data manually in admin table:**
 {
     "name":"Admin",
     "email":"EMAIL",
