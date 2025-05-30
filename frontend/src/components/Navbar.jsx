@@ -1,14 +1,16 @@
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../features/auth/authSlice';
 import { useTheme } from '../context/ThemeContext';
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { darkMode, toggleTheme } = useTheme();
   
   const handleLogout = () => {
     dispatch(logout());
+    navigate('/');
   };
 
   return (
